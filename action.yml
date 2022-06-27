@@ -33,4 +33,7 @@ runs:
       run: echo "::set-output name=filepath::$(echo output.csv)"
       shell: bash
     - run: synthesize -o output.csv ${{ inputs.input-file }}
+branding:
+  icon: 'table'
+  color: 'purple'
 ...
