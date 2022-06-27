@@ -1,5 +1,6 @@
 ---
-name: 'synthesized-table'
+name: synthesized-table
+author: synthesized-io
 description: 'Create a synthetic copy of a table.'
 inputs:
   input-file:  # id of input
