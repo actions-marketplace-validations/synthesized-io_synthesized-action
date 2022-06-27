@@ -1,5 +1,5 @@
 ---
-name: 'Synthesized'
+name: 'synthesized-table'
 description: 'Create a synthetic copy of a table.'
 inputs:
   input-file:  # id of input
