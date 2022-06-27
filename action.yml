@@ -1,0 +1,36 @@
+---
+name: 'Synthesized'
+description: 'Create a synthetic copy of a table.'
+inputs:
+  input-file:  # id of input
+    description: 'Path to input csv file'
+    required: true
+  synthesized-key:
+    description: 'Synthesized licence key.'
+    required: true
+  pip-index:
+    description: 'External pip index.'
+    required: true
+outputs:
+  output-file:
+    description: "File path to output synthetic data."
+    value: ${{ steps.set-output.filepath }}
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+        cache: 'pip'
+    - name: Create test-venv
+      shell: bash
+      run: |
+        python -m venv .env
+        source .env/bin/activate
+        pip install -U pip
+        pip install --pre 'synthesized' --extra-index-url ${{ inputs.pip-index }}
+    - id: set-output
+      run: echo "::set-output name=filepath::$(echo output.csv)"
+      shell: bash
+    - run: synthesize -o output.csv ${{ inputs.input-file }}
+...
